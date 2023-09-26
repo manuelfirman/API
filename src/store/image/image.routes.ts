@@ -1,5 +1,5 @@
 import fileUpload from "express-fileupload";
-import { BaseRouter } from "../shared/router/router";
+import { BaseRouter } from "../../shared/router/router";
 import { ImageController } from "./image.controller";
 import { ImageMiddlewares as ImageMiddlewares } from "./image.middlewares";
 

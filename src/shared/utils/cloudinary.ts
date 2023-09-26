@@ -9,7 +9,7 @@ class Cloudinary {
     });
   }
 
-  async uploadImage(filePath: string){
+  async uploadImage(filePath: string){    
     return await cloudinaryV2.uploader.upload(filePath, { folder: "API"});
   }
 }

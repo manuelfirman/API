@@ -1,4 +1,4 @@
-import { BaseRouter } from "../shared/router/router";
+import { BaseRouter } from "../../shared/router/router";
 import { TestController } from "./test.controller";
 import { TestMiddlewares } from "./test.middlewares";
 

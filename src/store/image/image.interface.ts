@@ -1,4 +1,4 @@
-import { IBaseEntity } from '../shared/models/mongodb/baseSchema';
+import { IBaseEntity } from '../shared/models/baseSchema';
 export interface IImage extends IBaseEntity {
   name: string;
   description: string;

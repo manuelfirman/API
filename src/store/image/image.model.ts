@@ -1,7 +1,7 @@
 
 import mongoose from 'mongoose';
 import { IImage } from './image.interface';
-import { BaseSchema } from '../shared/models/mongodb/baseSchema';
+import { BaseSchema } from '../shared/models/baseSchema';
 
 export class ImageSchema extends BaseSchema<IImage> {
   constructor() {

@@ -3,9 +3,10 @@ import cors from "cors";
 import morgan from "morgan";
 import session from "express-session";
 import fileUpload from "express-fileupload";
-import { RoutesApp } from "./shared/router/index.routes";
-import { postgreSQLConnection } from "./config/postgreSQL";
-import { mongoDBConnection } from "./config/mongo";
+import "dotenv/config";
+import { RoutesApp } from "./store/shared/routes/index.routes";
+import { postgreSQLConnection } from "./socialmedia/config/postgreSQL";
+import { mongoDBConnection } from "./store/config/mongo";
 
 export class Server {
   private app = express();
@@ -25,6 +26,10 @@ export class Server {
 
   private middlewares(){
     this.app.use(express.json());
+    this.app.use(fileUpload({
+      useTempFiles: true,
+      tempFileDir: './uploads'
+    }));
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(morgan("dev"));
     this.app.use("/api", this.router.routes());
@@ -35,11 +40,6 @@ export class Server {
       preflightContinue: false,
       optionsSuccessStatus: 204,
       credentials: true
-    }));
-
-    this.app.use(fileUpload({
-      useTempFiles: true,
-      tempFileDir: './uploads'
     }));
     
     this.app.use(

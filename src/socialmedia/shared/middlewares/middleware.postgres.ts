@@ -1,5 +1,5 @@
 import { BaseEntity, EntityTarget, Repository } from "typeorm";
-import { postgreSQLConnection } from "../../../config/postgreSQL";
+import { postgreSQLConnection } from "../../config/postgreSQL";
 
 export abstract class BaseMiddleware<T extends BaseEntity> {
   public repository: Repository<T>;

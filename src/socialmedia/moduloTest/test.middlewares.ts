@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { BaseMiddleware } from "../shared/middlewares/postgresql/middlewares";
+import { BaseMiddleware } from "../shared/middlewares/middleware.postgres";
 import { TestEntity } from "./test.entity";
 
 export class TestMiddlewares extends BaseMiddleware<TestEntity> {
@@ -8,7 +8,7 @@ export class TestMiddlewares extends BaseMiddleware<TestEntity> {
   }
 
   async testMidd(req: Request, res: Response, next: NextFunction){
-    console.log("Test Middleware");
+    console.log("Test Middleware Postgres");
     next();
   }
 

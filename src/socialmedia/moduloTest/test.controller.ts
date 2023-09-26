@@ -1,12 +1,8 @@
-
-import { cloudinary } from "../shared/utils/cloudinary";
-import { httpError } from "../shared/utils/errorHandler.util";
-import { Image } from "./image.model";
-
-import { ImageServices as ImageServices } from "./image.services";
 import { Request, Response } from "express";
+import { TestServices } from "./test.services";
+import { httpError } from "../../shared/utils/errorHandler.util";
 
-export class ImageController extends ImageServices {
+export class TestController extends TestServices {
   constructor(){
     super();
   }
@@ -28,7 +24,7 @@ export class ImageController extends ImageServices {
   async getByIdController(req: Request, res: Response) {
     const { id } = req.params;
     try {
-      const result = await this.getByIdService(id);
+      const result = await this.getByIdService(parseInt(id));
 
       res.status(200).json({
           status: "success",
@@ -42,43 +38,26 @@ export class ImageController extends ImageServices {
 
 
   async postController(req: Request, res: Response) {
-    const { name, description } = req.body;
+    const body = req.body;
     try {
-
-      if (!req.files || Object.keys(req.files).length === 0) {
-        return httpError.response(res, 400, "No files were uploaded.");
-      }
-
-        const upload = await cloudinary.uploadImage(Array.isArray(req.files.image) ? req.files.image[0].tempFilePath : req.files.image.tempFilePath); 
-        
-        const file = new Image ({
-          name,
-          description,
-          image: {
-            public_id: upload.public_id,
-            url: upload.url
-          } 
-        });
-
-        const result = await this.postService(file);
-        
-        res.status(200).json({
-            status: "success",
-            response: result
-        });
+      const result = await this.postService(body);
+      
+      res.status(200).json({
+          status: "success",
+          response: result
+      });
 
     } catch (error) {
       httpError.internal(res, 500, error as Error);
     }
   }
 
-
   async putController(req: Request, res: Response) {
     const { id } = req.params;
     const body = req.body;
 
     try {
-      const result = await this.putService(id, body);
+      const result = await this.putService(parseInt(id), body);
 
       res.status(200).json({
         status: "success",
@@ -89,11 +68,11 @@ export class ImageController extends ImageServices {
     }
   }
 
-  async deleteController(req: Request, res: Response){
+  async deleteController(req: Request, res: Response) {
     const { id } = req.params;
 
     try {
-      const result = await this.deleteService(id);
+      const result = await this.deleteService(parseInt(id));
 
       res.status(200).json({
         status: "success",
