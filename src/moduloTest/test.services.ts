@@ -1,4 +1,4 @@
-import { BaseServices } from "../shared/services/postgresql/services";
+import { BaseServices } from "../shared/services/servicesPostgres";
 import { TestEntity } from "./test.entity";
 
 export class TestServices extends BaseServices<TestEntity> {

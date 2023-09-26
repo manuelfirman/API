@@ -1,5 +1,5 @@
 import { BaseEntity, EntityTarget, FindOptionsWhere, Repository, UpdateResult } from "typeorm";
-import { postgreSQLConnection } from "../../../config/postgreSQL";
+import { postgreSQLConnection } from "../../config/postgreSQL";
 
 
 export abstract class BaseServices<T extends BaseEntity>{

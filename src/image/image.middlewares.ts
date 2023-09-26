@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import { NextFunction } from "express-serve-static-core";
 
-export class PhotoMiddlewares {
+export class ImageMiddlewares {
   constructor() {
     
   }
 
   testMidd(req: Request, res: Response, next: NextFunction) {
-    console.log("Middleware test Photo");
+    console.log(req.body);
     next();
   }
 }

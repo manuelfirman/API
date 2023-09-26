@@ -1,8 +1,12 @@
+
+import { cloudinary } from "../shared/utils/cloudinary";
 import { httpError } from "../shared/utils/errorHandler.util";
-import { PhotoServices } from "./photo.services";
+import { Image } from "./image.model";
+
+import { ImageServices as ImageServices } from "./image.services";
 import { Request, Response } from "express";
 
-export class PhotoController extends PhotoServices {
+export class ImageController extends ImageServices {
   constructor(){
     super();
   }
@@ -38,19 +42,36 @@ export class PhotoController extends PhotoServices {
 
 
   async postController(req: Request, res: Response) {
-    const body = req.body;
+    const { name, description } = req.body;
     try {
-      const result = await this.postService(body);
-      
-      res.status(200).json({
-          status: "success",
-          response: result
-      });
+
+      if (!req.files || Object.keys(req.files).length === 0) {
+        return httpError.response(res, 400, "No files were uploaded.");
+      }
+
+        const upload = await cloudinary.uploadImage(Array.isArray(req.files.image) ? req.files.image[0].tempFilePath : req.files.image.tempFilePath); 
+        
+        const file = new Image ({
+          name,
+          description,
+          image: {
+            public_id: upload.public_id,
+            url: upload.url
+          } 
+        });
+
+        const result = await this.postService(file);
+        
+        res.status(200).json({
+            status: "success",
+            response: result
+        });
 
     } catch (error) {
       httpError.internal(res, 500, error as Error);
     }
   }
+
 
   async putController(req: Request, res: Response) {
     const { id } = req.params;

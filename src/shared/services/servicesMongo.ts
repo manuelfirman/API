@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { IBaseEntity } from '../../models/mongodb/baseSchema';
+import { IBaseEntity } from '../models/mongodb/baseSchema';
 
 export abstract class BaseServiceMongo<T extends IBaseEntity> {
   protected model: mongoose.Model<T>;

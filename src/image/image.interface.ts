@@ -1,6 +1,6 @@
 import { IBaseEntity } from '../shared/models/mongodb/baseSchema';
-export interface IPhoto extends IBaseEntity {
-  title: string;
+export interface IImage extends IBaseEntity {
+  name: string;
   description: string;
-  imagePath: string;
+  image: object;
 }

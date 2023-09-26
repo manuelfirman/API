@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
 export interface IBaseEntity extends mongoose.Document {
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export abstract class BaseSchema<T extends IBaseEntity> {

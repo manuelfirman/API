@@ -1,10 +1,13 @@
+import fileUpload from "express-fileupload";
 import { BaseRouter } from "../shared/router/router";
-import { PhotoController } from "./photo.controller";
-import { PhotoMiddlewares } from "./photo.middlewares";
+import { ImageController } from "./image.controller";
+import { ImageMiddlewares as ImageMiddlewares } from "./image.middlewares";
 
-export class PhotoRoutes extends BaseRouter<PhotoController, PhotoMiddlewares> {
+export class ImageRoutes extends BaseRouter<ImageController, ImageMiddlewares> {
   constructor(){
-    super(PhotoController, PhotoMiddlewares, "photo");
+    super(ImageController, ImageMiddlewares, "image");
+
+    this.router.use(fileUpload())
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -1,15 +1,17 @@
 import express, { Router } from "express";
 import { TestRoutes } from "../../moduloTest/test.routes";
-import { PhotoRoutes } from "../../photo/photo.routes";
+import { ImageRoutes } from "../../image/image.routes";
 
 export class RoutesApp {
   public router: express.Application;
-  constructor() {}
+  constructor() {
+
+  }
 
   public routes(): Router[] {
     return [
       new TestRoutes().router,
-      new PhotoRoutes().router
+      new ImageRoutes().router
       // Agregar routers de otros modulos al array
     ];
   }
