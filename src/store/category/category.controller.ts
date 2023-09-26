@@ -1,17 +1,18 @@
 
+import { Request, Response } from "express";
 import { cloudinary } from "../../shared/utils/cloudinary";
 import { httpError } from "../../shared/utils/errorHandler.util";
-import { Image } from "./image.model";
+import { Category } from "./category.model";
+import { CategoryService } from "./category.service";
 import fs from "fs";
-import { ImageServices } from "./image.service";
-import { Request, Response } from "express";
+import { ICategory } from "./category.interface";
 
-export class ImageController extends ImageServices {
+export class CategoryController extends CategoryService {
   constructor(){
     super();
   }
 
-  async getAllController(req: Request, res: Response) {
+  async getAllController(req: Request, res: Response): Promise<void> {
     try {
       const result = await this.getAllService();
       
@@ -25,7 +26,7 @@ export class ImageController extends ImageServices {
     }
   }
 
-  async getByIdController(req: Request, res: Response) {
+  async getByIdController(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     try {
       const result = await this.getByIdService(id);
@@ -41,43 +42,51 @@ export class ImageController extends ImageServices {
   }
 
 
-  async postController(req: Request, res: Response) {
+  async postController(req: Request, res: Response): Promise<void> {
     const { name, description } = req.body;
-    try {
+    try{
+      const tempFilePaths = Array.isArray(req.files?.image)
+        ? req.files?.image.map((file) => file.tempFilePath)
+        : [req.files?.image.tempFilePath];
 
-      if (!req.files || Object.keys(req.files).length === 0) {
+        console.log(tempFilePaths);
+      if(!tempFilePaths) {
         return httpError.response(res, 400, "No files were uploaded.");
       }
 
-        const tempFilePath = (Array.isArray(req.files.image) ? req.files.image[0].tempFilePath : req.files.image.tempFilePath); 
-  
-        const upload = await cloudinary.uploadImage(tempFilePath);
+      const images = [];
       
-        const file = new Image ({
-          name,
-          description,
-          image: {
-            public_id: upload.public_id,
-            url: upload.url
-          } 
-        });
-
-        const result = await this.postService(file);
-
-        await fs.unlink(tempFilePath, (error) => ( (error) ? console.log(error) : null));
+      for(const tempFilePath of tempFilePaths) {
+        const upload = await cloudinary.uploadImage(tempFilePath as string);
         
-        res.status(200).json({
-            status: "success",
-            response: result
+        images.push({
+          public_id: upload.public_id,
+          url: upload.url
         });
+        console.log(images);
+        
+        await fs.unlink(tempFilePath as string, (error) => ( (error) ? console.log(error) : null));
+      }
+
+      const newCategory: ICategory = new Category ({
+        name,
+        description,
+        images: images
+      });
+
+      const result = await this.postService(newCategory);
+
+      res.status(200).json({
+          status: "success",
+          response: result
+      });
 
     } catch (error) {
       httpError.internal(res, 500, error as Error);
     }
   }
 
-
-  async putController(req: Request, res: Response) {
+  async putController(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     const body = req.body;
 
@@ -93,7 +102,7 @@ export class ImageController extends ImageServices {
     }
   }
 
-  async deleteController(req: Request, res: Response){
+  async deleteController(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
 
     try {

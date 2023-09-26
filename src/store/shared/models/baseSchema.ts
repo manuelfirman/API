@@ -1,6 +1,7 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 export interface IBaseEntity extends mongoose.Document {
+  _id?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

@@ -1,7 +1,7 @@
 
-import mongoose from 'mongoose';
-import { IImage } from './image.interface';
-import { BaseSchema } from '../shared/models/baseSchema';
+import mongoose from "mongoose";
+import { IImage } from "./image.interface";
+import { BaseSchema } from "../shared/models/baseSchema";
 
 export class ImageSchema extends BaseSchema<IImage> {
   constructor() {
@@ -13,8 +13,8 @@ export class ImageSchema extends BaseSchema<IImage> {
         public_id: { type: String, required: true },
         url: { type: String, required: true }
       }
-    })
+    });
   }
 }
 
-export const Image: mongoose.Model<IImage> = mongoose.model<IImage>('Image', new ImageSchema().schema);
+export const Image: mongoose.Model<IImage> = mongoose.model<IImage>("Image", new ImageSchema().schema);

@@ -34,13 +34,13 @@ export class TestRoutes extends BaseRouter<TestController, TestMiddlewares> {
       `/${path}/:id`,
       (req, res, next) => this.middleware.testMidd(req, res, next),
       (req, res) => this.controller.putController(req, res)
-    )
+    );
     
     // DELETE
     this.router.delete(
       `/${path}/:id`,
       (req, res, next) => this.middleware.testMidd(req, res, next),
       (req, res) => this.controller.deleteController(req, res)
-    )
+    );
   }
 }

@@ -13,7 +13,7 @@ export class MongoDBConnection {
     await mongoose.connect(this.DB_URI)
       .then((db) => {
         this.connection = db.connection;
-        console.log("MongoDB Database connected")
+        console.log("MongoDB Database connected");
       })
       .catch((error) => console.log(error));
   }

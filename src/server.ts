@@ -28,7 +28,7 @@ export class Server {
     this.app.use(express.json());
     this.app.use(fileUpload({
       useTempFiles: true,
-      tempFileDir: './uploads'
+      tempFileDir: "./uploads"
     }));
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(morgan("dev"));
@@ -58,6 +58,6 @@ export class Server {
   private listen(){
     this.app.listen(this.port, () => {
       console.log(`Server running on port ${this.port}`);
-    })
+    });
   }
 }

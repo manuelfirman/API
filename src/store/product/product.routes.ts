@@ -1,19 +1,17 @@
-import fileUpload from "express-fileupload";
 import { BaseRouter } from "../../shared/router/router";
-import { ImageController } from "./image.controller";
-import { ImageMiddlewares as ImageMiddlewares } from "./image.middleware";
+import { ProductController } from "./product.controller";
+import { ProductMiddlewares } from "./product.middleware";
 
-export class ImageRoutes extends BaseRouter<ImageController, ImageMiddlewares> {
-  constructor(){
-    super(ImageController, ImageMiddlewares, "image");
+export class ProductRoutes extends BaseRouter<ProductController, ProductMiddlewares> {
+  constructor() {
+    super(ProductController, ProductMiddlewares, "product");
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   routes(path: string): void {
     // GET ALL
     this.router.get(
-      `/${path}`, 
-      (req, res, next) => this.middleware.testMidd(req, res, next),	
+      `/${path}`,
+      (req, res, next) => this.middleware.testMidd(req, res, next),
       (req, res) => this.controller.getAllController(req, res)
     );
 
@@ -23,7 +21,7 @@ export class ImageRoutes extends BaseRouter<ImageController, ImageMiddlewares> {
       (req, res, next) => this.middleware.testMidd(req, res, next),
       (req, res) => this.controller.getByIdController(req, res)
     );
-    
+
     // CREATE - POST
     this.router.post(
       `/${path}`,
@@ -31,14 +29,14 @@ export class ImageRoutes extends BaseRouter<ImageController, ImageMiddlewares> {
       (req, res, next) => this.middleware.checkFilesExtension(req, res, next),
       (req, res) => this.controller.postController(req, res)
     );
-    
+
     // UPDATE - PUT
     this.router.put(
       `/${path}/:id`,
       (req, res, next) => this.middleware.testMidd(req, res, next),
       (req, res) => this.controller.putController(req, res)
     );
-    
+
     // DELETE
     this.router.delete(
       `/${path}/:id`,
