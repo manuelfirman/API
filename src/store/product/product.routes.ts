@@ -37,6 +37,20 @@ export class ProductRoutes extends BaseRouter<ProductController, ProductMiddlewa
       (req, res) => this.controller.putController(req, res)
     );
 
+      // PUT - ADD IMAGE
+      this.router.put(
+        `/${path}/addimages/:id`,
+        (req, res, next) => this.middleware.testMidd(req, res, next),
+        (req, res) => this.controller.addImageToProduct(req, res)
+      );
+
+    // PUT - DELETE IMAGE
+    this.router.put(
+      `/${path}/images/:id`,
+      (req, res, next) => this.middleware.testMidd(req, res, next),
+      (req, res) => this.controller.deleteProductImage(req, res)
+    );
+
     // DELETE
     this.router.delete(
       `/${path}/:id`,

@@ -51,7 +51,7 @@ export class ImageController extends ImageServices {
 
         const tempFilePath = (Array.isArray(req.files.image) ? req.files.image[0].tempFilePath : req.files.image.tempFilePath); 
   
-        const upload = await cloudinary.uploadImage(tempFilePath);
+        const upload = await cloudinary.upload(tempFilePath);
       
         const file = new Image ({
           name,

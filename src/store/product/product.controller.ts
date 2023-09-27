@@ -45,6 +45,7 @@ export class ProductController extends ProductServices {
 
   async postController(req: Request, res: Response): Promise<void> {
     const { name, description, price, category } = req.body;
+
     try {
       const tempFilePaths = Array.isArray(req.files?.image)
         ? req.files?.image.map((file) => file.tempFilePath)
@@ -118,13 +119,13 @@ export class ProductController extends ProductServices {
       res.status(200).json({
         status: "success",
         response: result
-    });
+      });
     } catch (error) {
       httpError.internal(res, 500, error as Error);
     }
   }
 
-  async addImage(req: Request, res: Response): Promise<void> {
+  async addImageToProduct(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     try {
       const product = await this.getByIdService(id);
@@ -153,6 +154,31 @@ export class ProductController extends ProductServices {
 
       product.images = [...product.images, ...images];
       
+      const result = await this.putService(id, product);
+      
+      res.status(200).json({
+          status: "success",
+          response: result
+      });
+
+    } catch (error) {
+      httpError.internal(res, 500, error as Error);
+    }
+  }
+
+  async deleteProductImage(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    const { public_id } = req.body;
+    try {
+      const product = await this.getByIdService(id);
+      if(product === null) return httpError.response(res, 404, "Product not found");
+
+      const image = product.images.find((image) => image.public_id === public_id);
+      if(!image) return httpError.response(res, 404, "Image not found");
+
+      await cloudinary.deleteImage(image.public_id);
+      product.images = product.images.filter((image) => image.public_id !== public_id);
+
       const result = await this.putService(id, product);
       
       res.status(200).json({
