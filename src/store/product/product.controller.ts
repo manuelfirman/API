@@ -42,7 +42,6 @@ export class ProductController extends ProductServices {
     }
   }
 
-
   async postController(req: Request, res: Response): Promise<void> {
     const { name, description, price, category } = req.body;
 

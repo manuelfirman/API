@@ -5,6 +5,7 @@ import { IProduct } from "./product.interface";
 export class ProductSchema extends BaseSchema<IProduct> {
   constructor(){
     super();
+    
     this.schema.add({
       name: { 
         type: String, 
