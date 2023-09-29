@@ -17,15 +17,24 @@ export class JWTHandler {
         expiresIn: process.env.JWT_EXPIRES_IN,
       }
     );
+
     return token;
   }
 
-  verifyToken = async (tokenJwt: string): Promise<string | jwt.JwtPayload | null> => {
+  verifyToken(jwtToken: string): string | jwt.JwtPayload | null {
     try {
-      return jwt.verify(tokenJwt, this.SECRET);
+      return jwt.verify(jwtToken, this.SECRET);
     } catch (e) {
       return null;
     }
-  };
+  }
 
+  decode(jwtToken: string): string | jwt.JwtPayload | null {
+    try {
+      return jwt.decode(jwtToken);
+    } catch (e) {
+      return null;
+    }
+  }
 }
+

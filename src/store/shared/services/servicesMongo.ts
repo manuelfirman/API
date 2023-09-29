@@ -28,5 +28,7 @@ export abstract class BaseServiceMongo<T extends IBaseEntity> {
     return this.model.findByIdAndDelete(id);
   }
 
-
+  protected async saveService(data: T): Promise<T> {
+    return data.save();
+  }
 }

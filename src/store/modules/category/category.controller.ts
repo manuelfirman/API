@@ -1,7 +1,7 @@
 
 import { Request, Response } from "express";
-import { cloudinary } from "../../shared/utils/cloudinary";
-import { httpError } from "../../shared/utils/errorHandler.util";
+import { cloudinary } from "../../../shared/utils/cloudinary";
+import { httpError } from "../../../shared/utils/errorHandler.util";
 import { Category } from "./category.model";
 import { CategoryService } from "./category.service";
 import fs from "fs";

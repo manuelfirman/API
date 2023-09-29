@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { BaseSchema } from "../shared/models/baseSchema";
+import { BaseSchema } from "../../shared/models/baseSchema";
 import { ICategory } from "./category.interface";
 
 export class CategorySchema extends BaseSchema<ICategory> {

@@ -1,6 +1,6 @@
 import { BaseServiceMongo } from "store/shared/services/servicesMongo";
-import { IUser } from "store/user/user.interface";
-import { User } from "store/user/user.model";
+import { IUser } from "store/modules/user/user.interface";
+import { User } from "store/modules/user/user.model";
 
 export class AuthService extends BaseServiceMongo<IUser> {
   constructor() {
@@ -10,4 +10,9 @@ export class AuthService extends BaseServiceMongo<IUser> {
   async getByEmailService(email: string): Promise<IUser | null> {
     return this.model.findOne({ email });
   }
+
+  async getByCodeService(code: string): Promise<IUser | null> {
+    return this.model.findOne({ code });
+  }
+
 }

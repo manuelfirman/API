@@ -1,4 +1,4 @@
-import { BaseServiceMongo } from "../shared/services/servicesMongo";
+import { BaseServiceMongo } from "../../shared/services/servicesMongo";
 import { IProduct } from "./product.interface";
 import { Product } from "./product.model";
 

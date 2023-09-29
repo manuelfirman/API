@@ -1,6 +1,6 @@
 import express, { Router } from "express";
-import { ProductRoutes } from "../../product/product.routes";
-import { CategoryRoutes } from "../../category/category.routes";
+import { ProductRoutes } from "../../modules/product/product.routes";
+import { CategoryRoutes } from "../../modules/category/category.routes";
 
 export class RoutesApp {
   public router: express.Application;

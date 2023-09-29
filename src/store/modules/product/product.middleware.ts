@@ -1,4 +1,4 @@
-import { BaseMiddlewareMongo } from "../shared/middlewares/middleware.mongo";
+import { BaseMiddlewareMongo } from "../../shared/middlewares/middleware.mongo";
 import { IProduct } from "./product.interface";
 import { Product } from "./product.model";
 

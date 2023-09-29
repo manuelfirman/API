@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { BaseSchema } from "../shared/models/baseSchema";
+import { BaseSchema } from "../../shared/models/baseSchema";
 import { IProduct } from "./product.interface";
 
 export class ProductSchema extends BaseSchema<IProduct> {

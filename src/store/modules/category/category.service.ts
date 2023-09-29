@@ -1,4 +1,4 @@
-import { BaseServiceMongo } from "../shared/services/servicesMongo";
+import { BaseServiceMongo } from "../../shared/services/servicesMongo";
 import { ICategory } from "./category.interface";
 import { Category } from "./category.model";
 

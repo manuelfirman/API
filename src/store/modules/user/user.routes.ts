@@ -1,19 +1,16 @@
-// import { BaseRouter } from "shared/router/router";
-import { BaseRouter } from "../../shared/router/router";
-import { CategoryController } from "./category.controller";
-import { CategoryMiddleware } from "./category.middleware";
-import fileUpload from "express-fileupload";
+import { BaseRouter } from "shared/router/router";
+import { UserController } from "./user.controller";
+import { UserMiddleware } from "./user.middleware";
 
-export class CategoryRoutes extends BaseRouter<CategoryController, CategoryMiddleware> {
+export class UserRoutes extends BaseRouter<UserController, UserMiddleware> {
   constructor() {
-    super(CategoryController, CategoryMiddleware, "category");
-    // this.router.use(fileUpload());
+    super(UserController, UserMiddleware, "user");
   }
-
+  // !! AGREGAR MIDDLEWARES A LAS RUTAS
   routes(path: string): void {
     // GET ALL
     this.router.get(
-      `/${path}`,
+      `/${path}/`,
       (req, res, next) => this.middleware.testMidd(req, res, next),
       (req, res) => this.controller.getAllController(req, res)
     );
@@ -27,9 +24,8 @@ export class CategoryRoutes extends BaseRouter<CategoryController, CategoryMiddl
 
     // CREATE - POST
     this.router.post(
-      `/${path}`,
-      (req, res, next) => this.middleware.checkFiles(req, res, next),
-      (req, res, next) => this.middleware.checkFilesExtension(req, res, next),
+      `/${path}/`,
+      (req, res, next) => this.middleware.testMidd(req, res, next),
       (req, res) => this.controller.postController(req, res)
     );
 

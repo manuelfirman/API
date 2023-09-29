@@ -1,7 +1,7 @@
-import { ProductServices } from "../product/product.service";
+import { ProductServices } from "./product.service";
 import { Request, Response } from "express";
-import { httpError } from "../../shared/utils/errorHandler.util";
-import { cloudinary } from "../../shared/utils/cloudinary";
+import { httpError } from "../../../shared/utils/errorHandler.util";
+import { cloudinary } from "../../../shared/utils/cloudinary";
 import fs from "fs";
 import { IProduct } from "./product.interface";
 import { Product } from "./product.model";
