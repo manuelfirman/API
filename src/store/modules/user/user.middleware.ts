@@ -1,8 +1,8 @@
-import { BaseMiddlewareMongo } from "store/shared/middlewares/middleware.mongo";
+import { BaseMiddlewareMongo } from "../../shared/middlewares/middleware.mongo";
 import { IUser } from "./user.interface";
 import { User } from "./user.model";
 import { NextFunction, Request, Response } from "express-serve-static-core";
-import { httpError } from "shared/utils/errorHandler";
+import { httpError } from "../../../shared/utils/errorHandler";
 import { ZodError } from "zod";
 import { UserValidator } from "./user.valid";
 

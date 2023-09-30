@@ -1,6 +1,6 @@
-import { BaseServiceMongo } from "store/shared/services/servicesMongo";
-import { IUser } from "store/modules/user/user.interface";
-import { User } from "store/modules/user/user.model";
+import { BaseServiceMongo } from "../../shared/services/servicesMongo";
+import { IUser } from "../../modules/user/user.interface";
+import { User } from "../../modules/user/user.model";
 
 export class AuthService extends BaseServiceMongo<IUser> {
   constructor() {

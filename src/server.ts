@@ -4,18 +4,25 @@ import morgan from "morgan";
 import session from "express-session";
 import fileUpload from "express-fileupload";
 import "dotenv/config";
-import { RoutesApp } from "./store/shared/routes/index.routes";
+import { RoutesAppStore } from "./store/shared/routes/store.routes";
 import { postgreSQLConnection } from "./socialmedia/config/postgreSQL";
 import { mongoDBConnection } from "./store/config/mongo";
+import { RoutesAppSocialMedia } from "./socialmedia/shared/routes/socialmedia.routes";
+import { storeOptions } from "./store/docs/storeSwaggerOptions";
+import swaggerUi from "swagger-ui-express";
+import swaggerJsDoc from "swagger-jsdoc";
+import { socialOptions } from "./socialmedia/docs/socialSwaggerOptions";
 
 export class Server {
   private app = express();
   private port = process.env.PORT || 3000;
-  private router = new RoutesApp();
+  private routerStore = new RoutesAppStore();
+  private routerSocialMedia = new RoutesAppSocialMedia();
 
   constructor(){
     this.database();
     this.middlewares();
+    this.docs();
     this.listen();
   }
 
@@ -32,7 +39,8 @@ export class Server {
     }));
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(morgan("dev"));
-    this.app.use("/api", this.router.routes());
+    this.app.use("/api/store", this.routerStore.routes());
+    this.app.use("/api/social", this.routerSocialMedia.routes());
     
     this.app.use(cors({
       origin: "*",
@@ -53,6 +61,13 @@ export class Server {
         },
       })
     );
+  }
+
+  private docs(){
+    const specsStore = swaggerJsDoc(storeOptions);
+    this.app.use("/api/docs/store", swaggerUi.serve, swaggerUi.setup(specsStore));
+    const specsSocial = swaggerJsDoc(socialOptions);
+    this.app.use("/api/docs/social", swaggerUi.serve, swaggerUi.setup(specsSocial));
   }
 
   private listen(){

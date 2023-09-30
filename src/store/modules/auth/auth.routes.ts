@@ -1,4 +1,4 @@
-import { BaseRouter } from "shared/router/router";
+import { BaseRouter } from "../../../shared/router/router";
 import { AuthController } from "./auth.controller";
 import { AuthMiddleware } from "./auth.middleware";
 

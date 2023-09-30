@@ -1,4 +1,4 @@
-import { BaseServiceMongo } from "store/shared/services/servicesMongo";
+import { BaseServiceMongo } from "../../shared/services/servicesMongo";
 import { IUser } from "./user.interface";
 import { User } from "./user.model";
 

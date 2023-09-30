@@ -1,8 +1,10 @@
 import express, { Router } from "express";
 import { ProductRoutes } from "../../modules/product/product.routes";
 import { CategoryRoutes } from "../../modules/category/category.routes";
+import { AuthRoutes } from "../../modules/auth/auth.routes";
+import { UserRoutes } from "../../modules/user/user.routes";
 
-export class RoutesApp {
+export class RoutesAppStore {
   public router: express.Application;
   constructor() {
 
@@ -10,9 +12,10 @@ export class RoutesApp {
 
   public routes(): Router[] {
     return [
+      new AuthRoutes().router,
+      new UserRoutes().router,
       new CategoryRoutes().router,
-      new ProductRoutes().router
-      // Agregar routers de otros modulos al array
+      new ProductRoutes().router,
     ];
   }
 }

@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import { BaseMiddlewareMongo } from "store/shared/middlewares/middleware.mongo";
-import { IUser } from "store/modules/user/user.interface";
-import { User } from "store/modules/user/user.model";
+import { BaseMiddlewareMongo } from "../../shared/middlewares/middleware.mongo";
+import { IUser } from "../../modules/user/user.interface";
+import { User } from "../../modules/user/user.model";
 import { AuthValidator } from "./auth.valid";
 import { ZodError } from "zod";
-import { httpError } from "shared/utils/errorHandler";
+import { httpError } from "../../../shared/utils/errorHandler";
 
 export class AuthMiddleware extends BaseMiddlewareMongo<IUser> {
   constructor() {

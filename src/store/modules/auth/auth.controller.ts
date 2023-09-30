@@ -1,9 +1,9 @@
-import { httpError } from "shared/utils/errorHandler";
+import { httpError } from "../../../shared/utils/errorHandler";
 import { AuthService } from "./auth.service";
 import { Request, Response } from "express";
-import { Crypt } from "shared/utils/cryptHandler";
-import { User } from "store/modules/user/user.model";
-import { IUser } from "store/modules/user/user.interface";
+import { Crypt } from "../../../shared/utils/cryptHandler";
+import { User } from "../../modules/user/user.model";
+import { IUser } from "../../modules/user/user.interface";
 import { v4 as uuid } from "uuid";
 
 export class AuthController extends AuthService {
