@@ -27,7 +27,8 @@
     "morgan": "^1.10.0",
     "pg": "^8.11.2",
     "typeorm": "^0.3.17",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "zod": "^3.22.2"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

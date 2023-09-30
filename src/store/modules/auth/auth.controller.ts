@@ -1,4 +1,4 @@
-import { httpError } from "shared/utils/errorHandler.util";
+import { httpError } from "shared/utils/errorHandler";
 import { AuthService } from "./auth.service";
 import { Request, Response } from "express";
 import { Crypt } from "shared/utils/cryptHandler";

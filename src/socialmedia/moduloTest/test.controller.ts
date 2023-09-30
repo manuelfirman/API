@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { TestServices } from "./test.services";
-import { httpError } from "../../shared/utils/errorHandler.util";
+import { httpError } from "../../shared/utils/errorHandler";
 
 export class TestController extends TestServices {
   constructor(){

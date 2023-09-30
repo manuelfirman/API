@@ -1,4 +1,4 @@
-import { httpError } from "shared/utils/errorHandler.util";
+import { httpError } from "shared/utils/errorHandler";
 import { UserService } from "./user.service";
 import { Request, Response } from "express";
 import { IUser } from "./user.interface";

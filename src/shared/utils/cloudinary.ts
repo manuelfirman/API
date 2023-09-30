@@ -1,4 +1,4 @@
-import { v2 as cloudinaryV2 } from "cloudinary";
+import { UploadApiResponse, v2 as cloudinaryV2 } from "cloudinary";
 
 class Cloudinary {
   constructor(){
@@ -9,11 +9,11 @@ class Cloudinary {
     });
   }
 
-  async uploadImage(filePath: string){    
+  async uploadImage(filePath: string): Promise<UploadApiResponse>{    
     return await cloudinaryV2.uploader.upload(filePath, { folder: "API"});
   }
 
-  async deleteImage(publicId: string){
+  async deleteImage(publicId: string): Promise<UploadApiResponse>{
     return await cloudinaryV2.uploader.destroy(publicId);
   }
 }

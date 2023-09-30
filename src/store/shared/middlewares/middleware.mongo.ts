@@ -1,6 +1,6 @@
 import { Document, Model } from "mongoose";
 import { Request, Response, NextFunction } from "express";
-import { httpError } from "../../../shared/utils/errorHandler.util";
+import { httpError } from "../../../shared/utils/errorHandler";
 import { JWTHandler } from "../../../shared/utils/jwtHandler";
 import { User } from "../../modules/user/user.model";
 import { CustomRequest } from "@types";

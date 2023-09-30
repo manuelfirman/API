@@ -1,6 +1,6 @@
 import { ProductServices } from "./product.service";
 import { Request, Response } from "express";
-import { httpError } from "../../../shared/utils/errorHandler.util";
+import { httpError } from "../../../shared/utils/errorHandler";
 import { cloudinary } from "../../../shared/utils/cloudinary";
 import fs from "fs";
 import { IProduct } from "./product.interface";
@@ -124,11 +124,11 @@ export class ProductController extends ProductServices {
     }
   }
 
-  async addImageToProduct(req: Request, res: Response): Promise<void> {
+  async addImageController(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     try {
       const product = await this.getByIdService(id);
-      if(product === null) return httpError.response(res, 404, "Product not found");
+      if(!product) return httpError.response(res, 404, "Product not found");
 
       const tempFilePaths = Array.isArray(req.files?.image)
         ? req.files?.image.map((file) => file.tempFilePath)
@@ -165,7 +165,7 @@ export class ProductController extends ProductServices {
     }
   }
 
-  async deleteProductImage(req: Request, res: Response): Promise<void> {
+  async deleteImageController(req: Request, res: Response): Promise<void> {
     const { id } = req.params;
     const { public_id } = req.body;
     try {
@@ -195,11 +195,11 @@ export class ProductController extends ProductServices {
 
     try {
       const product = await this.getByIdService(id);
-      if(product === null) return httpError.response(res, 404, "Product not found");
+      if(!product)
+        return httpError.response(res, 404, "Product not found");
 
       for(const image of product.images) {
         await cloudinary.deleteImage(image.public_id);
-        console.log(image.public_id);
       }
 
       const result = await this.deleteService(id);
