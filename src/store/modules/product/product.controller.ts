@@ -82,6 +82,8 @@ export class ProductController extends ProductServices {
         images: images
       });
 
+      
+
       const result = await this.postService(newProduct);
       
       res.status(200).json({

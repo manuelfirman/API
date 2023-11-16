@@ -12,5 +12,5 @@ export const storeOptions = {
       }
     ]
   },
-  apis: ["./src/store/modules/**/*.ts"]
+  apis: ["./src/store/modules/**/*.routes.ts"]
 };

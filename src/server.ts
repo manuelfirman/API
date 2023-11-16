@@ -22,8 +22,8 @@ export class Server {
   constructor(){
     this.database();
     this.middlewares();
-    this.docs();
     this.listen();
+    this.docs();
   }
 
   private database(){
@@ -64,10 +64,10 @@ export class Server {
   }
 
   private docs(){
-    const specsStore = swaggerJsDoc(storeOptions);
-    this.app.use("/api/docs/store", swaggerUi.serve, swaggerUi.setup(specsStore));
     const specsSocial = swaggerJsDoc(socialOptions);
     this.app.use("/api/docs/social", swaggerUi.serve, swaggerUi.setup(specsSocial));
+    const specsStore = swaggerJsDoc(storeOptions);
+    this.app.use("/api/docs/store", swaggerUi.serve, swaggerUi.setup(specsStore));
   }
 
   private listen(){

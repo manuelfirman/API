@@ -12,5 +12,5 @@ export const socialOptions = {
       }
     ]
   },
-  apis: ["./src/socialmedia/modules/**/*.ts"]
+  apis: ["./src/socialmedia/modules/**/*.routes.ts"]
 };
